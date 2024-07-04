@@ -1,6 +1,4 @@
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,6 +7,8 @@ public class Main {
         trie.insert("walk");
         trie.insert("want");
         trie.insert("war");
+        trie.insert("war");
+        trie.insert("warp");
         trie.insert("warp");
         trie.insert("we");
         trie.insert("wee");
@@ -18,11 +18,11 @@ public class Main {
         trie.insert("wit");
         trie.insert("yo");
 
+        
+        List<String> topKWords = trie.findTopKFrequentWords(2);
+        System.out.println("Top 2 " + "words are: " + topKWords);
 
-        // Encontrar las k palabras más frecuentes
-        int k = 2;
-        List<String> topKWords = trie.findTopKFrequentWords(k);
-        System.out.println("Top " + k + " words are: " + topKWords);
+        System.out.println(trie.searchByPrefix("wa"));
 
         trie.draw();
     }

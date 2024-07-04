@@ -99,4 +99,33 @@ class Trie {
             }
         }
     }
+    private void collectWords(TrieNode node, String prefix, List<String> words) {
+        if (node.isEndOfWord) {
+            words.add(prefix);
+        }
+        for (Map.Entry<Character, TrieNode> entry : node.children.entrySet()) {
+            collectWords(entry.getValue(), prefix + entry.getKey(), words);
+        }
+    }
+
+    private TrieNode searchNode(String prefix) {
+        TrieNode node = root;
+        for (char c : prefix.toCharArray()) {
+            node = node.children.get(c);
+            if (node == null) {
+                return null;
+            }
+        }
+        return node;
+    }
+
+    public List<String> searchByPrefix(String prefix){
+        List<String> words = new ArrayList<>();
+        TrieNode node = searchNode(prefix);
+        if( node != null){
+            collectWords(node, prefix , words);
+        }
+        
+        return words;
+    }
 }
