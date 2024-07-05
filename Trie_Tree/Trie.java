@@ -5,7 +5,8 @@ public class Trie implements ITrie {
   private TrieNode root;
 
   public Trie() {
-    root = new TrieNode();
+    // El nodo raiz que representa el caracter nulo
+    root = new TrieNode('\0');
   }
 
   private static class TrieNode {
@@ -88,9 +89,15 @@ public class Trie implements ITrie {
 
   private void printTrie(TrieNode node, String prefix, boolean isTail) {
     if (node != null) {
-      System.out.println(node.ch + (isTail ? "└── " : "├── ") + (node.isEndOfWord ? "(*)" : ""));
-      for (Map.Entry<Character, TrieNode> entry : node.children.entrySet())
-        printTrie(entry.getValue(), prefix + (isTail ? "    " : "│   "), false);
+      System.out.println(prefix + (isTail ? "└── " : "├── ") +
+                        (node.ch != '\0' ? node.ch : "") +
+                        (node.isEndOfWord ? "(" + node.count + ")" : ""));
+
+      int children = node.children.size();
+      int i = 0;
+      for (Map.Entry<Character, TrieNode> entry : node.children.entrySet()) {
+        printTrie(entry.getValue(), prefix + (isTail ? "    " : "│   "), ++i == children);
+      }
     }
   }
 }
