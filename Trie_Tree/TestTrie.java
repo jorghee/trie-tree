@@ -1,34 +1,44 @@
+import java.util.Scanner;
+
 public class TestTrie {
+  private static final Scanner sc = new Scanner(System.in);
+
   public static void main(String[] args) {
     Trie trie = new Trie();
+    menu();
 
-    // Insertar palabras en el Trie
-    trie.insert("apple");
-    trie.insert("apple");
-    trie.insert("apple");
-    trie.insert("app");
-    trie.insert("banana");
-    trie.insert("band");
-    trie.insert("appleel");
-    trie.insert("cojudo");
-    trie.insert("cojuda");
-    trie.insert("cojuda");
+    String command;
+    String op[];
 
-    // Probar el método contains
-    System.out.println("Contains 'apple': " + trie.contains("apple")); // true
-    System.out.println("Contains 'app': " + trie.contains("app"));     // true
-    System.out.println("Contains 'banana': " + trie.contains("banana")); // true
-    System.out.println("Contains 'orange': " + trie.contains("orange")); // false
+    while (true) {
+      System.out.print("\ntrie[string]> ");
+      command = sc.nextLine();
+      op = command.split(" ");
 
-    // Probar el método remove
-    System.out.println("Remove 'app': " + trie.remove("app")); // true
-    System.out.println("Contains 'app' after removal: " + trie.contains("app")); // false
-    System.out.println("Get 'app' after removal: " + trie.get("app")); // null
+      if (op[0].equals("insert"))
+        trie.insert(op[1]);
+      else if (op[0].equals("remove"))
+        System.out.println(trie.remove(op[1]));
+      else if (op[0].equals("contains"))
+        System.out.println(trie.contains(op[1]));
+      else if (op[0].equals("show"))
+        trie.printTrie();
+      else if (op[0].equals("quit")) {
+        break;
+      } else
+        System.out.println("Command not find.");
+    }
+  }
 
-    System.out.println();
-
-    // Dibujar el Trie
-    System.out.println("Current Trie structure:");
-    trie.printTrie();
+  private static void menu() {
+    System.out.println("Bienvenido, contruye tu arbol binario de busqueda :)\n");
+    System.out.println(
+        "---------------------------------------------------------------\n" +
+        "insert \t\t-> \tInsert a word\n" +
+        "remove \t\t-> \tRemove a word\n" +
+        "contains \t-> \tVerify if contains a word\n" +
+        "show \t\t-> \tShow the trie tree\n" +
+        "quit \t\t-> \tExit program\n" +
+        "---------------------------------------------------------------\n");
   }
 }
