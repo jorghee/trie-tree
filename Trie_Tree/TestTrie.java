@@ -31,7 +31,7 @@ public class TestTrie {
   }
 
   private static void menu() {
-    System.out.println("Bienvenido, contruye tu arbol binario de busqueda :)\n");
+    System.out.println("Bienvenido, contruye tu propio arbol digital :)\n");
     System.out.println(
         "---------------------------------------------------------------\n" +
         "insert \t\t-> \tInsert a word\n" +
